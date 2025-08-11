@@ -8,7 +8,17 @@ print("""                               Hi Welcome to,
                            Application""")
 
 def add_task(task):
-    task_list.append(task)
+    while(True):
+        user_input=input(f"\nEnter your task {len(task_list)+1}: ")
+        if(len(user_input) < 1):
+            print("                    Error: There shold be at least one character!")
+            continue
+        else:
+            task_list.append(task)
+            break
+    
+    
+    
 
 def view_tasks():
     if(len(task_list)<=0):
@@ -69,14 +79,7 @@ Please enter your input here: """).lower()
     if(user_input == "q" or user_input == "quit"):
         isEnd = True
     elif(user_input == "a" or user_input == "add"):
-        while(True):
-            user_input=input(f"\nEnter your task {len(task_list)+1}: ")
-            if(len(user_input) < 1):
-                print("                    Error: There shold be at least one character!")
-                continue
-            else:
-                add_task(user_input)
-                break
+        add_task()
     elif(user_input == "v" or user_input == "view"):
         view_tasks()
     elif(user_input == "d" or user_input == "delete"):
