@@ -7,6 +7,15 @@ print("""                               Hi Welcome to,
       ///         //////                 |//////    //////
                            Application""")
 
+def quitApp():
+    print("""
+|||||||||||   |||    |||       ///\\\\\\       |||\\\    |||   ||| ///
+    |||       |||    |||      ///  \\\\\\      ||| \\\   |||   |||///
+    |||       ||||||||||     /////\\\\\\\\\\     |||  \\\  |||   |||\\\\\\ 
+    |||       |||    |||    ///      \\\\\\    |||   \\\ |||   ||| \\\\\\ 
+    |||       |||    |||   ///        \\\\\\   |||    \\\|||   |||  \\\\\\     You!
+""")
+
 def add_task(task):
     while(True):
         user_input=input(f"\nEnter your task {len(task_list)+1}: ")
@@ -78,6 +87,7 @@ while(not isEnd):
 Please enter your input here: """).lower()
     if(user_input == "q" or user_input == "quit"):
         isEnd = True
+        quitApp()
     elif(user_input == "a" or user_input == "add"):
         add_task()
     elif(user_input == "v" or user_input == "view"):
