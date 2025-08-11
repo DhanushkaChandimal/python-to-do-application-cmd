@@ -34,9 +34,9 @@ def view_tasks():
     if(len(task_list)<=0):
         print(f"\n                    {'\033[93m'}To do list is empty!{RESET}")
     else:
-        print("")
+        print(f"                    {'\033[1m'}{'\033[4m'}Task No.   Task Description{RESET}")
         for index in range(len(task_list)):
-            print(f"                    {index+1} - {task_list[index]}")
+            print(f"                    {index+1}           {task_list[index]}")
 
 def delete_task():
     if(len(task_list) <= 0):
