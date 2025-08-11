@@ -1,15 +1,6 @@
 task_list = []
 RESET = '\033[0m'
 
-print(f"""{'\033[106m'}                               Hi Welcome to,                .{RESET}
-
-     //////////     ///////              |//////      ///////
-        ///       ///    ///             |||  ///   ///    ///
-       ///        ///   ///              |||  ///   ///   /// 
-      ///         //////                 |//////    //////
-      
-{'\033[105m'}                           Application                       .{RESET}""")
-
 def quitApp():
     print(f"""
 |||||||||||   |||    |||       ///\\\\\\       |||\\\    |||   ||| ///
@@ -25,6 +16,9 @@ def add_task():
         if(len(user_input) < 1):
             print(f"                    {'\033[91m'}Error: There shold be at least one character!{RESET}")
             continue
+        elif(user_input in task_list):
+            print(f"                    {'\033[93m'}{'\033[1m'}{user_input}{'\033[22m'} is allready exist in the list!{RESET}")
+            continue
         else:
             task_list.append(user_input)
             print(f"                    {'\033[92m'}Task {'\033[1m'}{user_input}{'\033[22m'} added sucessfully{RESET}")
@@ -39,16 +33,16 @@ def view_tasks():
             print(f"                    {index+1}           {task_list[index]}")
 
 def delete_task():
+    # Trying to delete when list is empty
     if(len(task_list) <= 0):
         return f"\n                    {'\033[93m'}There is nothing to remove. To do list is empty!{RESET}"
     while(True):
         user_input=input("\nEnter task number or task name to remove: ")
         try:
             user_input = int(user_input)
-            if(user_input > len(task_list) and not str(user_input) in task_list):
-                print(f"\n                    {'\033[93m'}There is nothing found in the list!{RESET}")
-                view_tasks()
-            elif(user_input <= len(task_list) and str(user_input) in task_list):
+            
+            # Found equal task number and task description
+            if(user_input <= len(task_list) and str(user_input) in task_list):
                 while(True):
                     user_value_or_number = input("""\nThere is a value and number equal to your input. Plese verify what you want to delete.
 t - for task, n - for task number: """).lower()
@@ -60,23 +54,37 @@ t - for task, n - for task number: """).lower()
                         return f"\n                    {'\033[92m'}Task number {'\033[1m'}{user_input}{'\033[22m'} is removed successfully{RESET}"
                     else:
                         print(f"\n                    {'\033[91m'}Invalid input!{RESET}")
+            # Delete with task number
             elif(user_input <= len(task_list)):
                 del task_list[user_input - 1]
                 return f"\n                    {'\033[92m'}Task number {'\033[1m'}{user_input}{'\033[22m'} is removed successfully{RESET}"
+            # Delete with task description
             elif(user_input <= len(task_list) and str(user_input) in task_list):
                 task_list.remove(str(user_input))
                 return f"\n                    {'\033[92m'}{'\033[1m'}{user_input}{'\033[22m'} is removed successfully{RESET}"
+            # Trying to delete with an input not in the tasks or invalid task number
             else:
-                print(f"\n                    {'\033[91m'}There is nothing found in the list!{RESET}")
+                print(f"\n                    {'\033[93m'}There is nothing found in the list!{RESET}")
                 view_tasks()
-                
+        # Confirm user enter strings only
         except ValueError:
             if(user_input in task_list):
                 task_list.remove(user_input)
                 return f"\n                    {'\033[92m'}{'\033[1m'}{user_input}{'\033[22m'} is removed successfully{RESET}"
+            # Trying to delete with an input not in the tasks
             else:
                 print(f"\n                    {'\033[91m'}There is nothing found in the list!{RESET}")
                 view_tasks()
+
+# Application starts here
+print(f"""{'\033[106m'}                               Hi Welcome to,                .{RESET}
+
+     //////////     ///////              |//////      ///////
+        ///       ///    ///             |||  ///   ///    ///
+       ///        ///   ///              |||  ///   ///   /// 
+      ///         //////                 |//////    //////
+      
+{'\033[105m'}                           Application                       .{RESET}""")
 
 isEnd = False
 while(not isEnd):
