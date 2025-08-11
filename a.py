@@ -12,12 +12,11 @@ def add_task(task):
 
 def view_tasks():
     if(len(task_list)<=0):
-        return "\n                    To do list is empty!"
+        print("\n                    To do list is empty!")
     else:
-        task_table = ""
+        print("")
         for index in range(len(task_list)):
-            task_table += f"\n                    {index+1} - {task_list[index]}"
-        return task_table
+            print(f"                    {index+1} - {task_list[index]}")
 
 def delete_task():
     if(len(task_list) <= 0):
@@ -27,7 +26,8 @@ def delete_task():
         try:
             user_input = int(user_input)
             if(user_input > len(task_list) and not str(user_input) in task_list):
-                print("\n                    Invalid input!")
+                print("\n                    There is nothing found in the list!")
+                view_tasks()
             elif(user_input <= len(task_list) and str(user_input) in task_list):
                 while(True):
                     user_value_or_number = input("""\nThere is a value and number equal to your input. Plese verify what you want to delete.
@@ -47,14 +47,16 @@ t - for task, n - for task number: """).lower()
                 task_list.remove(str(user_input))
                 return f"\n                    {user_input} is removed successfully"
             else:
-                print("\n                    Invalid input!")
+                print("\n                    There is nothing found in the list!")
+                view_tasks()
                 
         except ValueError:
             if(user_input in task_list):
                 task_list.remove(user_input)
                 return f"\n                    {user_input} is removed successfully"
             else:
-                print("\n                    Invalid input!")
+                print("\n                    There is nothing found in the list!")
+                view_tasks()
 
 isEnd = False
 while(not isEnd):
@@ -76,7 +78,7 @@ Please enter your input here: """).lower()
                 add_task(user_input)
                 break
     elif(user_input == "v" or user_input == "view"):
-        print(view_tasks())
+        view_tasks()
     elif(user_input == "d" or user_input == "delete"):
         print(delete_task())
     else:
